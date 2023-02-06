@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a28afafa7831b9041b90bcd8412bfb2d, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  FIXED_TIMESTEP: 0.02
+  MAX_INCLINE_ANGLE: 75
+  MAX_MOVE_SPEED: 9
+  MAX_FALL_SPEED: 25
+  ACCELERATION: 5
+  JUMP_FORCE: 8
+  ACTION_RAYCAST_LENGTH: 1
+  MAX_DISTANCE: 2.1
+  TURNING_COEFF: 3
+  FALLSPEED_BOOST: 1.4
+  SENSITIVITY: 0.2
+  DIRECTION_CORRECTION: 3
+  CAN_DODGE: 0
+  CAN_JUMP: 1
+  CAN_ACT: 1
+  CAN_CROUCH: 0
+  input: {x: 0, y: 0}
+  crouchCollider:
+    center: {x: 0, y: 0, z: 0}
+    radius: 0
+    height: 0
+    direction: 0
+  standCollider:
+    center: {x: 0, y: 0, z: 0}
+    radius: 0.5
+    height: 2
+    direction: 1
+  WindowAction:
+    m_PersistentCalls:
+      m_Calls: []
+  ItemAction:
+    m_PersistentCalls:
+      m_Calls: []
+  FireballAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3033952733738965777, guid: 023e0b927b1ddf74880dc4407bc9af7a, type: 3}
+        m_TargetAssemblyTypeName: FireballScript, Assembly-CSharp
+        m_MethodName: SpawnFireball
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

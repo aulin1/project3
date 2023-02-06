@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< Updated upstream
   - attack
   - boss
+=======
+  - Throwable
+  - Window
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
