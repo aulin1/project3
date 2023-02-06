@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 8396340293817995826}
   - component: {fileID: 8396340293817995839}
   - component: {fileID: 8396340293817995838}
-  - component: {fileID: 2465540831769834593}
   - component: {fileID: 3033952733738965777}
   m_Layer: 2
   m_Name: Player
@@ -380,21 +379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6ab3c0471435d5c4698dcb99a481f408, type: 2}
---- !u!114 &2465540831769834593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8396340293817995829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
 --- !u!114 &3033952733738965777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,5 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb9095c076d9b54cbcc303e2c03c690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 6ab3c0471435d5c4698dcb99a481f408, type: 2}
   FIREBALL: {fileID: 4795464053367033545, guid: cf74efee5d4ca90458acdbdea096bbb4, type: 3}
-  pov: {fileID: 8396340293817995825}
+  pov: {fileID: 8396340293230930763}

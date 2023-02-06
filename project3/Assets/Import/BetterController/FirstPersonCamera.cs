@@ -52,6 +52,9 @@ public class FirstPersonCamera : MonoBehaviour
 
             player.localRotation = Quaternion.Lerp(player.localRotation, qp, 0.25f);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, q, 0.25f);
+
+
+            //Debug.DrawRay(transform.position,transform.forward * 15f, Color.blue, 0.1f);
         }
     }
 

@@ -47,16 +47,4 @@ MonoBehaviour:
       m_Calls: []
   FireballAction:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3033952733738965777, guid: 023e0b927b1ddf74880dc4407bc9af7a, type: 3}
-        m_TargetAssemblyTypeName: FireballScript, Assembly-CSharp
-        m_MethodName: SpawnFireball
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

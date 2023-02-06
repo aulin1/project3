@@ -4,23 +4,27 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerData", order = 1)]
 public class PlayerDataSO : ScriptableObject
 {
+    [Header("System Settings")]
+    [Tooltip("If you are unsure, probably don't touch these.")]
     [Range(0.001f, 0.05f)]
-    [SerializeField] float FIXED_TIMESTEP = 0.01f;
+    [SerializeField] float FIXED_TIMESTEP = 0.02f;
+    [SerializeField] int DEL_WARNING_WINDOW = 2, DEL_WARNING_ACTION = 2, DEL_WARNING_THROW = 2;
+    [Header("Player Settings")]
     [SerializeField] int MAX_INCLINE_ANGLE = 75;
     [SerializeField] float MAX_MOVE_SPEED = 9f;
     [SerializeField] float MAX_FALL_SPEED = 25f; // unused?
     [SerializeField] float ACCELERATION = 5f;
-    [SerializeField] float JUMP_FORCE = 15f;
+    [SerializeField] float JUMP_FORCE = 8f;
     [SerializeField] float ACTION_RAYCAST_LENGTH = 1f;
     [SerializeField] float MAX_DISTANCE = 2.1f;
     public float TURNING_COEFF = 3f;
-    public float FALLSPEED_BOOST = 1.2f;
+    public float FALLSPEED_BOOST = 1.4f;
     public float SENSITIVITY = 0.2f;
-    public float DIRECTION_CORRECTION = 2f;
-    public bool CAN_DODGE = true;
+    public float DIRECTION_CORRECTION = 3f;
+    public bool CAN_DODGE = false;
     public bool CAN_JUMP = true;
     public bool CAN_ACT = true;
-    public bool CAN_CROUCH = true;
+    public bool CAN_CROUCH = false;
 
     public Vector2 input;
 
@@ -29,11 +33,15 @@ public class PlayerDataSO : ScriptableObject
 
     public ColliderInfo crouchCollider, standCollider;
 
-    [Tooltip("Put a reference to the script and link the function that takes in a raycasthit")]
-    [SerializeField] UnityEvent<RaycastHit>
-        WindowAction,
-        ItemAction,
-        FireballAction;
+    [Tooltip("See comment in code for how to use")]
+    // if you have a behavior that needs to be called by the Action func, then
+    // in your behavior script, create an OnEnable and OnDisable func that subscribe
+    // and desubscribe (respectively) from the delegate.
+    public delegate void ActionWithRaycast(RaycastHit r);
+    public ActionWithRaycast
+        WindowActionDelegate,
+        ItemActionDelegate,
+        FireballActionDelegate;
 
 
     public RaycastHit 
@@ -52,6 +60,21 @@ public class PlayerDataSO : ScriptableObject
         CheckAction(dest, Vector3.zero);
         CheckGround(dest);
         CheckRoof(dest);
+
+        // delegates are handled by Subscribers.
+        // dont forget to unsubscribe from the delegate.
+        // please don't cause a memory leak. thanks.
+        CheckDelegates();
+    }
+
+    void CheckDelegates()
+    {
+        if (WindowActionDelegate?.GetInvocationList().Length > DEL_WARNING_WINDOW
+            && ItemActionDelegate?.GetInvocationList().Length > DEL_WARNING_THROW
+            && FireballActionDelegate?.GetInvocationList().Length > DEL_WARNING_ACTION)
+        {
+            Debug.LogError("You might have a memory leak in your PlayerData!");
+        }
     }
 
     public void BoolJump(bool value)
@@ -72,13 +95,6 @@ public class PlayerDataSO : ScriptableObject
     public void SetCurrent(ColliderInfo val)
     {
         current = val;
-    }
-
-    public bool CheckIfEmpty()
-    {
-        return WindowAction.GetPersistentEventCount() == 0
-            && ItemAction.GetPersistentEventCount() == 0
-            && FireballAction.GetPersistentEventCount() == 0;
     }
 
     public float GetDirectionCorrectionMultiplier(Vector3 moveDir, Vector3 velocity)
@@ -133,15 +149,15 @@ public class PlayerDataSO : ScriptableObject
         switch(index)
         {
             case 0:
-                WindowAction.Invoke(actionInformation);
+                WindowActionDelegate?.Invoke(actionInformation);
                 break;
 
             case 1:
-                ItemAction.Invoke(actionInformation);
+                ItemActionDelegate?.Invoke(actionInformation);
                 break;
 
             default:
-                FireballAction.Invoke(actionInformation);
+                FireballActionDelegate?.Invoke(actionInformation);
                 break;
         }
     }

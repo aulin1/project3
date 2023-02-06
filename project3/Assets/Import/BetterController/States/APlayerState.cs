@@ -21,11 +21,6 @@ public abstract class APlayerState
         this.rigidbody = rigidbody;
         this.changeStateFunc = changeStateFunc;
         transform = rigidbody.transform;
-
-        if (data.CheckIfEmpty())
-        {
-            Debug.LogError("SET VALUES OF ACTION FUNCTIONS!");
-        }
     }
 
     protected void SetColliderParameters()
@@ -63,7 +58,6 @@ public abstract class APlayerState
         {
             return;
         }
-
 
         if (data.CheckAction(transform.position, transform.forward))
         {

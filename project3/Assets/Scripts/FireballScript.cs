@@ -5,10 +5,21 @@ using UnityEngine.InputSystem;
 
 public class FireballScript : MonoBehaviour
 {
+    [SerializeField] PlayerDataSO data;
     [SerializeField] GameObject FIREBALL;
-    [SerializeField] Transform pov;
 
     GameObject g;
+
+    // THIS IS VITAL
+    private void OnEnable()
+    {
+        data.FireballActionDelegate += SpawnFireball;
+    }
+    private void OnDisable()
+    {
+        data.FireballActionDelegate -= SpawnFireball;
+    }
+    
 
     public void SpawnFireball(RaycastHit r)
     {
@@ -16,8 +27,7 @@ public class FireballScript : MonoBehaviour
         {
             Destroy(g);
         }
-
-        Debug.Log(pov.position);
-        g = Instantiate(FIREBALL, pov.position, pov.rotation);
+        
+        g = Instantiate(FIREBALL, transform.position, Quaternion.identity);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireballBehaviorScript : MonoBehaviour
 {
     [SerializeField] ParticleSystem fire, explosion;
+    [SerializeField] Vector3 dest;
 
     IEnumerator process;
 
@@ -17,21 +18,23 @@ public class FireballBehaviorScript : MonoBehaviour
 
     IEnumerator IEProcess()
     {
-        while (true)
+        while ((transform.position - dest).sqrMagnitude > 0.5f)
         {
             yield return new WaitForFixedUpdate();
 
-            transform.Translate(transform.forward * 0.5f);
+            transform.position = Vector3.MoveTowards(transform.position, dest, 0.5f);
         }
+
+        Die();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Die()
     {
         StopCoroutine(process);
 
         explosion.Play();
 
-        StartCoroutine(WaitThenDestroy(1.2f));
+        StartCoroutine(WaitThenDestroy(0.6f));
     }
 
     IEnumerator WaitThenDestroy(float t)
