@@ -5,27 +5,41 @@ using UnityEngine;
 public class FireballBehaviorScript : MonoBehaviour
 {
     [SerializeField] ParticleSystem fire, explosion;
-    [SerializeField] Vector3 dest;
+    public Vector3 boss;
+    Vector3 origin;
 
     IEnumerator process;
+    Quaternion rot;
 
     private void Start()
     {
         process = IEProcess();
+
+        origin = transform.position;
 
         StartCoroutine(process);
     }
 
     IEnumerator IEProcess()
     {
-        while ((transform.position - dest).sqrMagnitude > 0.5f)
+        while ((origin-transform.position).sqrMagnitude < 40 * 40)
         {
             yield return new WaitForFixedUpdate();
 
-            transform.position = Vector3.MoveTowards(transform.position, dest, 0.5f);
-        }
+            transform.Translate(transform.forward * 0.4f, Space.World);
 
-        Die();
+            transform.rotation = Quaternion.Lerp(transform.rotation, 
+                Quaternion.LookRotation(boss - transform.position + Vector3.up*0.5f, Vector3.up), 0.03f);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("HI");
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            Die();
+        }
     }
 
     private void Die()
@@ -34,11 +48,13 @@ public class FireballBehaviorScript : MonoBehaviour
 
         explosion.Play();
 
-        StartCoroutine(WaitThenDestroy(0.6f));
+        StartCoroutine(WaitThenDestroy(3f));
     }
 
     IEnumerator WaitThenDestroy(float t)
     {
+        GetComponent<MeshRenderer>().enabled = false;
+
         yield return new WaitForSeconds(t);
 
         Destroy(gameObject);

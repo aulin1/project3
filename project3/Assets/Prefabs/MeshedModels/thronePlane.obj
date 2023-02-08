@@ -1,0 +1,23 @@
+# ProBuilder 5.0.6
+# https://unity3d.com/unity/features/worldbuilding/probuilder
+# 2/7/2023 10:54:38 PM
+
+mtllib ./thronePlane.mtl
+o thronePlane
+
+g Plane (1)
+v 11.18662 -3.293136E-07 -4.768372E-07
+v 9.683247 0.00441153 2.700006
+v 0 -3.293136E-07 -4.768372E-07
+v 1.385773 0.00441153 2.700006
+
+vt -11.18662 -4.773746E-07
+vt -9.683247 2.70001
+vt 0 -4.773746E-07
+vt -1.385773 2.70001
+
+vn 0 0.9999987 -0.001634015
+
+usemtl ProBuilderDefault
+f 3/3/1 4/4/1 2/2/1 1/1/1
+

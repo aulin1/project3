@@ -27,6 +27,7 @@ public class PlayerDataSO : ScriptableObject
     public bool CAN_CROUCH = false;
 
     public Vector2 input;
+    public Vector3 action_forward;
 
     ColliderInfo current;
     bool queueJump = false;
@@ -131,6 +132,7 @@ public class PlayerDataSO : ScriptableObject
 
     public bool CheckGround(Vector3 pos)
     {
+        //Debug.Log(groundInformation.collider?.name);
         return Physics.Raycast(pos + 0.5f * current.height * Vector3.up, Vector3.down, out groundInformation, MAX_DISTANCE, ~(1 << 2));
     }
 
@@ -141,6 +143,8 @@ public class PlayerDataSO : ScriptableObject
 
     public bool CheckAction(Vector3 pos, Vector3 forward)
     {
+        action_forward = forward.normalized;
+
         return Physics.Raycast(pos, forward, out actionInformation, ACTION_RAYCAST_LENGTH, ~(1 << 2));
     }
 

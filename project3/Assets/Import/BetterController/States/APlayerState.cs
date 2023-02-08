@@ -31,6 +31,15 @@ public abstract class APlayerState
         collider.direction = state_collider_info.direction;
     }
 
+    public Vector3 GetTrueForward()
+    {
+        Vector3 v;
+        v = transform.forward;
+        v.y = Camera.main.transform.forward.y;
+
+        return v;
+    }
+
     // Handles a Vector2 input for lateral movement.
     public virtual void Move(InputAction.CallbackContext context)
     {
@@ -59,7 +68,7 @@ public abstract class APlayerState
             return;
         }
 
-        if (data.CheckAction(transform.position, transform.forward))
+        if (data.CheckAction(transform.position, GetTrueForward()))
         {
             Collider collider = data.actionInformation.collider;
 

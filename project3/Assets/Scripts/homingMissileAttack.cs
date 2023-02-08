@@ -11,6 +11,8 @@ public class homingMissileAttack : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        Invoke("Delete", 5f);
     }
 
     // Update is called once per frame
@@ -19,8 +21,13 @@ public class homingMissileAttack : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
 
+    void Delete()
+    {
+        Destroy(gameObject);
+    }
+
     void OnTriggerEnter(Collider other){
-        if(!other.CompareTag("boss")){
+        if(other.CompareTag("Player")){
             Destroy(gameObject);
         }
     }

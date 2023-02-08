@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class FireballScript : MonoBehaviour
 {
     [SerializeField] PlayerDataSO data;
+    [SerializeField] Transform boss;
     [SerializeField] GameObject FIREBALL;
 
     GameObject g;
@@ -27,7 +28,10 @@ public class FireballScript : MonoBehaviour
         {
             Destroy(g);
         }
-        
-        g = Instantiate(FIREBALL, transform.position, Quaternion.identity);
+
+        g = Instantiate(FIREBALL, transform.position + data.action_forward * 1.5f, Quaternion.identity);
+        g.transform.forward = data.action_forward;
+
+        g.GetComponent<FireballBehaviorScript>().boss = boss.position;
     }
 }

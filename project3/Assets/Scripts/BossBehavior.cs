@@ -6,11 +6,21 @@ public class BossBehavior : MonoBehaviour
 {
     public int HP;
 
-    private Color col;
+    [SerializeField] SkinnedMeshRenderer smr;
+    Color[] colors;
+
+    // private Color col;
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<Renderer>().material.color;
+        // col = GetComponent<Renderer>().material.color;
+        colors = new Color[smr.materials.Length];
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            colors[i] = smr.materials[i].color;
+        }
+
         HP = 100;
     }
 
@@ -18,9 +28,10 @@ public class BossBehavior : MonoBehaviour
     void Update()
     {
         //For testing purposes only
+        /*
         if(Input.GetKeyDown(KeyCode.Space)){  
             damageTaken(10);
-        }   
+        }   */
 
         if(HP <= 0){
             Destroy(gameObject);
@@ -29,7 +40,14 @@ public class BossBehavior : MonoBehaviour
 
     void damageTaken(int damage){
         HP = HP - damage;
-        GetComponent<Renderer>().material.color = Color.red;
+
+        // GetComponent<Renderer>().material.color = Color.red;
+
+        foreach(Material m in smr.materials)
+        {
+            m.color = Color.red;
+        }
+
         Invoke("changeColorBack", 0.5f);
     }
 
@@ -40,6 +58,11 @@ public class BossBehavior : MonoBehaviour
     }    
 
     void changeColorBack(){
-        GetComponent<Renderer>().material.color = col;
-    }    
+        //GetComponent<Renderer>().material.color = col;
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            smr.materials[i].color = colors[i];
+        }
+    }
 }

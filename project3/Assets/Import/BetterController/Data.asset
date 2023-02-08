@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Data
   m_EditorClassIdentifier: 
   FIXED_TIMESTEP: 0.02
+  DEL_WARNING_WINDOW: 2
+  DEL_WARNING_ACTION: 2
+  DEL_WARNING_THROW: 2
   MAX_INCLINE_ANGLE: 75
   MAX_MOVE_SPEED: 9
   MAX_FALL_SPEED: 25
   ACCELERATION: 5
-  JUMP_FORCE: 8
+  JUMP_FORCE: 15
   ACTION_RAYCAST_LENGTH: 1
-  MAX_DISTANCE: 2.1
+  MAX_DISTANCE: 2.4
   TURNING_COEFF: 3
-  FALLSPEED_BOOST: 1.4
+  FALLSPEED_BOOST: 1.6
   SENSITIVITY: 0.2
   DIRECTION_CORRECTION: 3
   CAN_DODGE: 0
@@ -29,6 +32,7 @@ MonoBehaviour:
   CAN_ACT: 1
   CAN_CROUCH: 0
   input: {x: 0, y: 0}
+  action_forward: {x: -0.29059696, y: 0.120859094, z: 0.94918203}
   crouchCollider:
     center: {x: 0, y: 0, z: 0}
     radius: 0
@@ -39,12 +43,3 @@ MonoBehaviour:
     radius: 0.5
     height: 2
     direction: 1
-  WindowAction:
-    m_PersistentCalls:
-      m_Calls: []
-  ItemAction:
-    m_PersistentCalls:
-      m_Calls: []
-  FireballAction:
-    m_PersistentCalls:
-      m_Calls: []

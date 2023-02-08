@@ -22,7 +22,11 @@ public class AOEAttack : MonoBehaviour
     {
         internalTimer += Time.deltaTime;
         if(internalTimer <= 3){
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+
+            Vector3 ppos = player.position;
+            ppos.y = transform.position.y;
+
+            transform.position = Vector3.MoveTowards(transform.position, ppos, speed * Time.deltaTime);
         } else if(internalTimer >= 5){
             transform.localScale = new Vector3(7f, 1f, 7f);
             Destroy(gameObject, 0.1f);
